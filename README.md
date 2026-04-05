@@ -8,15 +8,15 @@ hotdog_data = []
 with open("Hotdogs.txt", "r") as file:
 # Reads the file line by line
     for line in file:
-    # Splits the string into a list using commas
+# Splits the string into a list using commas
         items = line.strip().split(",")
-        # Converts the list into a dictionary with labels
+# Converts the list into a dictionary with labels
         record = {
             "id": items[0],
             "vendor": items[1],
             "location": items[2]
         }
-        # Stores each record in hotdog_data
+# Stores each record in hotdog_data
         hotdog_data.append(record))
 
 # test example: print all data to check it is in the list
