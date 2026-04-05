@@ -2,12 +2,16 @@
 My computing coursework.  
 
 # Opening the text file with the needed information
+
 # hotdog_data will store all records
 hotdog_data = []
-# 
+
+# Open this file safely, let me use it, and close it automatically
 with open("Hotdogs.txt", "r") as file:
+
 # Reads the file line by line
     for line in file:
+    
 # Splits the string into a list using commas
         items = line.strip().split(",")
 # Converts the list into a dictionary with labels
@@ -16,6 +20,7 @@ with open("Hotdogs.txt", "r") as file:
             "vendor": items[1],
             "location": items[2]
         }
+
 # Stores each record in hotdog_data
         hotdog_data.append(record))
 
