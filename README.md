@@ -2,14 +2,22 @@
 My computing coursework.  
 
 # Opening the text file with the needed information
+# hotdog_data will store all records
 hotdog_data = []
+# 
 with open("Hotdogs.txt", "r") as file:
+# Reads the file line by line
     for line in file:
-        # .strip() removes the newline character at the end of the line and .split() breaks the string into a list based commas
+    # Splits the string into a list using commas
         items = line.strip().split(",")
-
-        # add the resulting list to our main list
-        hotdog_data.append(items)
+        # Converts the list into a dictionary with labels
+        record = {
+            "id": items[0],
+            "vendor": items[1],
+            "location": items[2]
+        }
+        # Stores each record in hotdog_data
+        hotdog_data.append(record))
 
 # test example: print all data to check it is in the list
 for i in (hotdog_data):
