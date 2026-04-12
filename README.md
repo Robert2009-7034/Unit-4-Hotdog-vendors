@@ -42,3 +42,10 @@ def linear_search_unsorted(hotdog_data, target_vendor):
             result.append(record)
     #return all matching records
     return result
+
+# Linear Search (Sorted)
+def linear_search_sorted(data, target_vendor):
+    result = []
+    for record in data:
+        if record["vendor"] == target_vendor:
+            result.append(record)
