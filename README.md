@@ -49,3 +49,12 @@ def linear_search_sorted(data, target_vendor):
     for record in data:
         if record["vendor"] == target_vendor:
             result.append(record)
+
+def bubble_sort(data):
+    arr = data.copy()
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if arr[j]["vendor"] > arr[j + 1]["vendor"]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                return arr
