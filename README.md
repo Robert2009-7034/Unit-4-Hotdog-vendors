@@ -46,7 +46,6 @@ def linear_unsorted(hotdog_data, target_vendor):
     # creates a empty list to store matching records
     result = []
 
-    start_time = time.perf_counter()
     # loop through each record in the hotdog_data
     for record in hotdog_data:
 
@@ -74,7 +73,7 @@ def bubble_sort(hotdog_data):
 
                 hotdog_data[j], hotdog_data[j+1] = hotdog_data[j+1], hotdog_data[j]
 
-    return hotdog_data
+    return hotdog_data 
 
 
 
@@ -119,16 +118,33 @@ def linear_sorted(hotdog_data, target_vendor):
     return result 
 
 def binary_search(hotdog_data, target_id):
-    low = 0
-    high = len(hotdog_data) - 1
+    def find_bound(first=True):
+        low = 0
+        high = len(hotdog_data) - 1
+        result_idx = -1  # Initialize so it returns -1 if not found
 
-    while low <= high:
-        mid = (low + high) // 2
+        while low <= high:
+            mid = (low + high) // 2
+            if hotdog_data[mid]["id"] == target_id:
+                result_idx = mid
+                if first:
+                    high = mid - 1
+                else:
+                    low = mid + 1
+            elif hotdog_data[mid]["id"] < target_id:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return result_idx
 
-        if hotdog_data[mid]["id"] == target_id:
-            return hotdog_data[mid]
-        elif hotdog_data[mid]["id"] < target_id:
-            low = mid + 1
-        else:
-            high = mid - 1
+    start = find_bound(first=True)
+    if start == -1:
+        return []  # Return empty if ID doesn't exist
+
+    end = find_bound(first=False)
+    
+    # Returns all dictionaries that matched the target_id
+    return hotdog_data[start : end + 1]
+
+
         
