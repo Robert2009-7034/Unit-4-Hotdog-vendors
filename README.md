@@ -47,11 +47,12 @@ print(hotdog_data[0])
 # Creating the function for the unsorted linear search
 def linear_unsorted(hotdog_data, target_vendor):
 
+    start_time_linear_unsorted = time.perf_counter() 
+
+
     # creates a empty list to store matching records
     result = []
     
-start_time_linear_unsorted = time.perf_counter() 
-
     # loop through each record in the hotdog_data
     for record in hotdog_data:
 
@@ -60,18 +61,21 @@ start_time_linear_unsorted = time.perf_counter()
 
             result.append(record)
 
+    end_time_linear_unsorted = time.perf_counter()
+
+    total_linear_unsorted_time = end_time_linear_unsorted - start_time_linear_unsorted
+
+    print(f"The total time it took the unsorted linear to be complete is: {total_linear_unsorted_time:.3f}s")
+
     #return all matching records
-    return result 
-end_time_linear_unsorted = time.perf_counter() 
+    return result
 
-total_linear_unsorted_time = end_time_linear_unsorted - start_time_linear_unsorted
 
-print(f"The total time it took the unsorted linear to be complete is: {total_linear_unsorted_time:.1f}s")
-
+   
 # Creating the function for the bubble sort
 def bubble_sort(hotdog_data):
-    
-start_time_bubble_sort = time.perf_counter()
+
+    start_time_bubble_sort = time.perf_counter()
 
     # Counts the total number of items in hotdog_data and store that number in num_of_records_in_list
     num_of_records_in_list = len(hotdog_data)
@@ -87,22 +91,23 @@ start_time_bubble_sort = time.perf_counter()
                 
                 # Swaps the two records if if the current record's "vendor" value is greater than the next
                 hotdog_data[j], hotdog_data[j+1] = hotdog_data[j+1], hotdog_data[j]
-                
+
+    end_time_bubble_sort = time.perf_counter()
+
+    total_bubble_sort_time = end_time_bubble_sort - start_time_bubble_sort
+
+    print(f"The total time it took the bubble sort to be complete is: {total_bubble_sort_time:.3f}s")
+    
     # returns the sorted list after all passes have been done             
-    return hotdog_data 
+    return hotdog_data
 
-end_time_bubble_sort = time.perf_counter()
-
-total_bubble_sort_time = end_time_bubble_sort - start_time_bubble_sort
-
-print(f"The total time it took the bubble sort to be complete is: {total_bubble_sort_time:.1f}s")
 
 
 
 # Creates a function for the quick sort 
 def quick_sort(hotdog_data):
-    
-start_time_quick_sort = time.perf_counter()
+
+    start_time_quick_sort = time.perf_counter()
     
     # checks if the list has 0 or 1 items
     if len(hotdog_data) <= 1:
@@ -121,23 +126,26 @@ start_time_quick_sort = time.perf_counter()
     
     # Creates a list of all records where the vendor is greater than the pivot
     right = [x for x in hotdog_data if x["vendor"] > pivot]
+
+    end_time_quick_sort = time.perf_counter()
+
+    total_quick_sort_time = end_time_quick_sort - start_time_quick_sort
+
+    print(f"The total time it took the quick sort to be complete is: {total_quick_sort_time:.3f}s")
     
     # Sorts the left and right lists and combies them with the middle making a sorted list
     return quick_sort(left) + middle + quick_sort(right)
 
-end_time_quick_sort = time.perf_counter()
 
-total_quick_sort_time = end_time_quick_sort - start_time_qiuck_sort
-
-print(f"The total time it took the quick sort to be complete is: {total_quick_sort_time:.1f}s")
 
 # Creating the function for the sorted linear search
 def linear_sorted(hotdog_data, target_vendor):
 
+    start_time_linear_sorted = time.perf_counter()
+
+
     # creates a empty list to store matching records
     result = []
-
-start_time_linear_sorted = time.perf_counter()
 
     # loop through each record in the hotdog_data
     for record in hotdog_data:
@@ -152,88 +160,98 @@ start_time_linear_sorted = time.perf_counter()
         elif record["vendor"] > target_vendor:
             
             break
+
+    end_time_linear_sorted = time.perf_counter()
+
+    total_linear_sorted_time = end_time_linear_sorted - start_time_linear_sorted
+
+    print(f"The total time it took the sorted linear to be complete is: {total_linear_sorted_time:.1f}s")
         
     #return all matching records
     return result 
 
-end_time_linear_sorted = time.perf_counter()
+
+
+# A function to search for records with a specific id using a binary search
+def binary_search(hotdog_data, target_id):
+    
+    start_time_binary_search = time.perf_counter()   
+
+# A helper function to find either the first or last occurrence of the target id
+def find_bound(first=True):
+
+    
+    # Sets the starting index of the search range
+    low = 0
+    
+    # Sets the ending index of the search range
+    high = len(hotdog_data) - 1
+    
+    # Stores the index of a found match but stays at -1 if no match is found
+    result_index = -1  
+    
+    # Runs the binart search loop whille there is still a valide search range
+    while low <= high:
+        
+        # Calculates the middle index of the current search range
+        mid = (low + high) // 2
+        
+        # Checks the middle element matches the target ID
+        if hotdog_data[mid]["id"] == target_id:
+            
+            # Stores the index where the match was found
+            result_index = mid
+            
+            # If searching for the first occurrence continue searchung to the left
+            if first:
+                
+                # Moves the seach tange to rgw left half
+                high = mid - 1
+                
+            # If searching for the last occurrence continue searchung to the right
+            else:
+                
+                # Moves the search range to the right half
+                low = mid + 1
+                
+        # If the middle ID is smaller than the target search the right half         
+        elif hotdog_data[mid]["id"] < target_id:
+            
+            # Narrows the search by updating the lower bound
+            low = mid + 1
+            
+        else:
+            
+            # Narrows the search by updating the upper bound
+            high = mid - 1
+            
+    # returns the index of the occurrence or -1 if not found        
+    return result_index
+    
+# Finds the first position where the target ID appears    
+start = find_bound(first=True)
+
+# Checks if the target ID was not found at all
+if start == -1:
+
+    end_time_linear_sorted = time.perf_counter()
+
+    total_linear_sorted_time = end_time_linear_sorted - start_time_linear_sorted
+
+    print(f"The total time it took the sorted linear to be complete is: {total_linear_sorted_time:.1f}s")
+    
+    # returns an empty list if no match is found
+    return []  
+
+    
+# Finds the last position where the target ID appears     
+end = find_bound(first=False)
+
+end_time_binary_search = time.perf_counter()
 
 total_linear_sorted_time = end_time_linear_sorted - start_time_linear_sorted
 
 print(f"The total time it took the sorted linear to be complete is: {total_linear_sorted_time:.1f}s")
 
-# A function to search for records with a specific id using a binary search
-def binary_search(hotdog_data, target_id):
-    
-    # A helper function to find either the first or last occurrence of the target id
-    def find_bound(first=True):
-        
-start_time_binary_search = time.perf_counter()   
-        
-        # Sets the starting index of the search range
-        low = 0
-        
-        # Sets the ending index of the search range
-        high = len(hotdog_data) - 1
-        
-        # Stores the index of a found match but stays at -1 if no match is found
-        result_index = -1  
-        
-        # Runs the binart search loop whille there is still a valide search range
-        while low <= high:
-            
-            # Calculates the middle index of the current search range
-            mid = (low + high) // 2
-            
-            # Checks the middle element matches the target ID
-            if hotdog_data[mid]["id"] == target_id:
-                
-                # Stores the index where the match was found
-                result_index = mid
-                
-                # If searching for the first occurrence continue searchung to the left
-                if first:
-                    
-                    # Moves the seach tange to rgw left half
-                    high = mid - 1
-                    
-                # If searching for the last occurrence continue searchung to the right
-                else:
-                    
-                    # Moves the search range to the right half
-                    low = mid + 1
-                    
-            # If the middle ID is smaller than the target search the right half         
-            elif hotdog_data[mid]["id"] < target_id:
-                
-                # Narrows the search by updating the lower bound
-                low = mid + 1
-                
-            else:
-                
-                # Narrows the search by updating the upper bound
-                high = mid - 1
-                
-        # returns the index of the occurrence or -1 if not found        
-        return result_idx
-        
-    # Finds the first position where the target ID appears    
-    start = find_bound(first=True)
-    
-    # Checks if the target ID was not found at all
-    if start == -1:
-        
-        # returns an empty list if no match is found
-        return []  
-        
-    # Finds the last position where the target ID appears     
-    end = find_bound(first=False)
-    
-    # Returns all dictionaries that matched the target_id
-    return hotdog_data[start : end + 1]
-
-end_time_binary_search = time.perf_counter()
-
-total_binary_search_time = end_time_binary_search - start_time_binary_search
-
-print(f"The total time it took the binary search to be complete is: {total_binary_search_time:.1f}s")
+# Returns all dictionaries that matched the target_id
+return hotdog_data[start : end + 1]
