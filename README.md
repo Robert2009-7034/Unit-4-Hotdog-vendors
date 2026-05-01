@@ -49,6 +49,8 @@ def linear_unsorted(hotdog_data, target_vendor):
 
     # creates a empty list to store matching records
     result = []
+    
+start_time_linear_unsorted = time.perf_counter() 
 
     # loop through each record in the hotdog_data
     for record in hotdog_data:
@@ -60,11 +62,16 @@ def linear_unsorted(hotdog_data, target_vendor):
 
     #return all matching records
     return result 
+end_time_linear_unsorted = time.perf_counter() 
 
+total_linear_unsorted_time = end_time_linear_unsorted - start_time_linear_unsorted
 
+print(f"The total time it took the unsorted linear to be complete is: {total_linear_unsorted_time:.1f}s")
 
 # Creating the function for the bubble sort
 def bubble_sort(hotdog_data):
+    
+start_time_bubble_sort = time.perf_counter()
 
     # Counts the total number of items in hotdog_data and store that number in num_of_records_in_list
     num_of_records_in_list = len(hotdog_data)
@@ -84,10 +91,18 @@ def bubble_sort(hotdog_data):
     # returns the sorted list after all passes have been done             
     return hotdog_data 
 
+end_time_bubble_sort = time.perf_counter()
+
+total_bubble_sort_time = end_time_bubble_sort - start_time_bubble_sort
+
+print(f"The total time it took the bubble sort to be complete is: {total_bubble_sort_time:.1f}s")
+
 
 
 # Creates a function for the quick sort 
 def quick_sort(hotdog_data):
+    
+start_time_quick_sort = time.perf_counter()
     
     # checks if the list has 0 or 1 items
     if len(hotdog_data) <= 1:
@@ -110,13 +125,19 @@ def quick_sort(hotdog_data):
     # Sorts the left and right lists and combies them with the middle making a sorted list
     return quick_sort(left) + middle + quick_sort(right)
 
+end_time_quick_sort = time.perf_counter()
 
+total_quick_sort_time = end_time_quick_sort - start_time_qiuck_sort
+
+print(f"The total time it took the quick sort to be complete is: {total_quick_sort_time:.1f}s")
 
 # Creating the function for the sorted linear search
 def linear_sorted(hotdog_data, target_vendor):
 
     # creates a empty list to store matching records
     result = []
+
+start_time_linear_sorted = time.perf_counter()
 
     # loop through each record in the hotdog_data
     for record in hotdog_data:
@@ -135,12 +156,19 @@ def linear_sorted(hotdog_data, target_vendor):
     #return all matching records
     return result 
 
+end_time_linear_sorted = time.perf_counter()
+
+total_linear_sorted_time = end_time_linear_sorted - start_time_linear_sorted
+
+print(f"The total time it took the sorted linear to be complete is: {total_linear_sorted_time:.1f}s")
 
 # A function to search for records with a specific id using a binary search
 def binary_search(hotdog_data, target_id):
     
     # A helper function to find either the first or last occurrence of the target id
     def find_bound(first=True):
+        
+start_time_binary_search = time.perf_counter()   
         
         # Sets the starting index of the search range
         low = 0
@@ -204,5 +232,8 @@ def binary_search(hotdog_data, target_id):
     # Returns all dictionaries that matched the target_id
     return hotdog_data[start : end + 1]
 
+end_time_binary_search = time.perf_counter()
 
-        
+total_binary_search_time = end_time_binary_search - start_time_binary_search
+
+print(f"The total time it took the binary search to be complete is: {total_binary_search_time:.1f}s")
