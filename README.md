@@ -92,6 +92,8 @@ def bubble_sort(hotdog_data):
                 # Swaps the two records if if the current record's "vendor" value is greater than the next
                 hotdog_data[j], hotdog_data[j+1] = hotdog_data[j+1], hotdog_data[j]
 
+    return hotdog_data
+
     end_time_bubble_sort = time.perf_counter()
 
     total_bubble_sort_time = end_time_bubble_sort - start_time_bubble_sort
