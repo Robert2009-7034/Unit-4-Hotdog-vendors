@@ -1,23 +1,25 @@
 # Unit-4-Hotdog-vendors
 # My computing coursework.  
+
+# Imports the time module that will allow me to compare all the different types of searches and sorts to find the most efficient ones
 import time
 
-#  hotdog_data will store all records
+#  Creates a list called hotdog_data that will store all records and be used throughout my coursework
 hotdog_data = []
 
-# Open this file safely, let me use it, and close it automatically
+# Open this file safely so the vendors information is available to use for the sorts and searches, let me use it, and close it automatically
 with open("Hotdogs.txt", "r", encoding="utf-8") as file:
 
-# 
+    # Reads line by line in the file so my sorts and searches can actually sort and search through the list 
     for line in file:
     
-# Splits the string into a list using commas
+# Splits the string into a list using commas so all the information about the vendors are properly separated 
         items = line.strip().split(",")
         
-        # 
+        # Checks that there is the correct numberr of items in the list which is 7 as there is the id, vednor, year_week, vegan, meat, onions and ketchup
         if len(items) == 7:
 
-            # Creates a dictionary for each record with the appropriate data types
+            # Creates a dictionary for each record with the appropriate data types as all the different types of items have different measurements
             record = {
                 "id": items[0],
                 "vendor": items[1],
@@ -28,7 +30,7 @@ with open("Hotdogs.txt", "r", encoding="utf-8") as file:
                 "ketchup": float(items[6])
                 }
 
-            # Stores each record in hotdog_data
+            # Stores each record in hotdog_data so I can use the variable hotdog_data in my searches and sorts
             hotdog_data.append(record)
 
 # test example: print all data to check it is in the list
