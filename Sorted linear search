@@ -1,0 +1,30 @@
+# Creating the function for the sorted linear search
+def linear_sorted(hotdog_data, target_vendor):
+
+    start_time_linear_sorted = time.perf_counter()
+
+    # creates a empty list to store matching records
+    result = []
+
+    # loop through each record in the hotdog_data
+    for record in hotdog_data:
+        
+        # Checks that vendor id matches the target
+        if record["vendor"] == target_vendor:
+            
+            # Adds the dicionary called record
+            result.append(record)
+        
+        # Checks that vendor id matches the target
+        elif record["vendor"] > target_vendor:
+            
+            break
+
+    end_time_linear_sorted = time.perf_counter()
+
+    total_linear_sorted_time = end_time_linear_sorted - start_time_linear_sorted 
+
+    print(f"The totle time it took the sorted linear to be complete is: {total_linear_sorted_time:.8f}s")
+
+    #return all matching records
+    return result 
