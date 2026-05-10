@@ -1,0 +1,80 @@
+# A function to search for records with a specific id using a binary search
+def binary_search(hotdog_data, target_id):
+    
+    start_time_binary_search = time.perf_counter()   
+    
+    # A helper function to find either the first or last occurrence of the target id
+    def find_bound(first=True):
+        
+        # Sets the starting index of the search range
+        low = 0
+        
+        # Sets the ending index of the search range
+        high = len(hotdog_data) - 1
+        
+        # Stores the index of a found match but stays at -1 if no match is found
+        result_index = -1  
+        
+        # Runs the binary search loop while there is still a valid search range
+        while low <= high:
+            
+            # Calculates the middle index of the current search range
+            mid = (low + high) // 2
+            
+            # Checks the middle element matches the target ID
+            if hotdog_data[mid]["id"] == target_id:
+                
+                # Stores the index where the match was found
+                result_index = mid
+                
+                # If searching for the first occurrence continue searching to the left
+                if first:
+                    
+                    # Moves the search range to the left half
+                    high = mid - 1
+                    
+                # If searching for the last occurrence continue searching to the right
+                else:
+                    # Moves the search range to the right half
+                    low = mid + 1
+                
+            # If the middle ID is smaller than the target search the right half         
+            elif hotdog_data[mid]["id"] < target_id:
+                
+                # Narrows the search by updating the lower bound
+                low = mid + 1
+                
+            else:
+                
+                # Narrows the search by updating the upper bound
+                high = mid - 1
+        # returns the index of the occurrence or -1 if not found        
+        return result_index
+    
+    # Finds the first position where the target ID appears    
+    start = find_bound(first=True)
+
+    # Checks if the target ID was not found at all
+    if start == -1:
+
+        end_time_binary_search = time.perf_counter()
+        
+        total_binary_search_time = end_time_binary_search - start_time_binary_search
+        
+        print(f"The total time it took the binary search to be complete is: {total_binary_search_time:.8f}s")
+        
+        # returns an empty list if no match is found
+        return []  
+
+        
+    # Finds the last position where the target ID appears     
+    end = find_bound(first=False)
+
+    end_time_binary_search = time.perf_counter()
+
+    total_binary_search_time = end_time_binary_search - start_time_binary_search
+
+    print(f"The total time it took the binary search to be complete is: {total_binary_search_time:.8f}s")
+
+    # Returns all dictionaries that matched the target_id
+    return hotdog_data[start : end + 1]
