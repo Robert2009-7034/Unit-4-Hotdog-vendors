@@ -1,0 +1,11 @@
+import time
+
+start_time = time.perf_counter()
+
+# The code that would be timed goes here
+
+end_time = time.perf_counter()
+
+total_linear_unsorted_time = end_time_linear_unsorted - start_time_linear_unsorted
+
+print(f"The totle time it took the _____________ to be complete is: {total_linear_unsorted_time:.8f}s")
