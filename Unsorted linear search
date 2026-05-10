@@ -1,0 +1,24 @@
+# Creating the function for the unsorted linear search
+def linear_unsorted(hotdog_data, target_vendor):
+
+    start_time_linear_unsorted = time.perf_counter()
+
+    # creates a empty list to store matching records
+    result = []
+
+    # loop through each record in the hotdog_data
+    for record in hotdog_data:
+
+        # Checks that vendor id matches the target
+        if record["vendor"] == target_vendor:
+
+            result.append(record)
+
+    end_time_linear_unsorted = time.perf_counter()
+
+    total_linear_unsorted_time = end_time_linear_unsorted - start_time_linear_unsorted
+
+    print(f"The totle time it took the unsorted linear to be complete is: {total_linear_unsorted_time:.8f}s")
+
+    #return all matching records
+    return result 
