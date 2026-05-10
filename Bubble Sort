@@ -1,0 +1,28 @@
+# Creating the function for the bubble sort
+def bubble_sort(hotdog_data):
+
+    start_time_bubble_sort = time.perf_counter()
+
+    # Counts the total number of items in hotdog_data and store that number in num_of_records_in_list
+    num_of_records_in_list = len(hotdog_data)
+    
+    # An outer loop that controls the how many passes the inner loop will make
+    for i in range(num_of_records_in_list-1):
+
+        # An inner loop which compares and swaps adjacent items in each pass
+        for j in range(num_of_records_in_list-i-1):
+
+            # Checks if the current record's vendor is greater than the next recorded vendor
+            if hotdog_data[j]["vendor"] > hotdog_data[j+1]["vendor"]:
+
+                # Swaps the two records if the current record's vendor is greater than the next record's vendor
+                hotdog_data[j], hotdog_data[j+1] = hotdog_data[j+1], hotdog_data[j]
+
+    end_time_bubble_sort = time.perf_counter()
+
+    total_time_bubble_sort = end_time_bubble_sort - start_time_bubble_sort
+
+    print(f"The totle time it took the bubble sort to be complete is: {total_time_bubble_sort:.8f}s")
+
+    # returns the sorted list of records
+    return hotdog_data
