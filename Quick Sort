@@ -1,0 +1,37 @@
+# Creating the function for the quick sort
+def quick_sort(hotdog_data):
+
+    start_time_quick_sort = time.perf_counter()
+    
+    # Checks if the list has 0 or 1 item
+    if len(hotdog_data) <= 1:
+
+        end_time_quick_sort = time.perf_counter()
+
+        total_time_quick_sort = end_time_quick_sort - start_time_quick_sort
+
+        print(f"The totle time it took the bubble sort to be complete is: {total_time_quick_sort:.8f}s")
+
+        # returns the list as it is already sorted
+        return hotdog_data
+        
+    # Chooses a pivot value, which is used to split the list
+    pivot = hotdog_data[len(hotdog_data) // 2]["vendor"]
+
+    # Creates a list of all records where the vendor is less than the pivot value
+    left = [x for x in hotdog_data if x["vendor"] < pivot]
+
+    # Creates a list of all records where the vendor is equal to the pivot value
+    middle = [x for x in hotdog_data if x["vendor"] == pivot]
+
+    # Creates a list of all records where the vendor is greater than the pivot value
+    right = [x for x in hotdog_data if x["vendor"] > pivot]
+
+    end_time_quick_sort = time.perf_counter()
+
+    total_time_quick_sort = end_time_quick_sort - start_time_quick_sort
+
+    print(f"The totle time it took the bubble sort to be complete is: {total_time_quick_sort:.8f}s")
+
+    #  Sorts the left and right lists and combines them with the middle list a sorted list of records
+    return quick_sort(left) + middle + quick_sort(right)
